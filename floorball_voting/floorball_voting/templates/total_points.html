@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'myapp/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+  <h1>Total Points for All Games</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Player</th>
+        <th>Points</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for player, points in all_games %}
+        <tr>
+          <td>{{ player }}</td>
+          <td>{{ points }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Points by Game</h2>
+  <ul>
+    {% for game in games %}
+      <li>
+        <a href="{% url 'game_points' game.id %}">Game {{ game.id }} Points</a>
+      </li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'select_game' %}">Back</a> 
+{% endblock %}

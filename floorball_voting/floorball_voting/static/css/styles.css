@@ -1,0 +1,73 @@
+/* Reset some default styling */
+body, ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* Apply a background color to the body, and set the font */
+body {
+    background-color: #f0f8ff; /* Light blue background */
+    color: #333; /* Dark text */
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Style the headings */
+h1, h3 {
+    color: #004080; /* Darker blue for headings */
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+/* Style the list of games */
+ul {
+    list-style: none;
+}
+
+li {
+    background: #fff; /* White background for list items */
+    border: 1px solid #ccc; /* Border between items */
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+li a {
+    color: #ffffff; 
+    text-decoration: none;
+}
+
+/* Style the forms */
+form {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+input[type="submit"] {
+    background: #004080;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background: #0059b3;
+}
+
+/* Style the back link */
+a {
+    display: inline-block;
+    background: #0556a7;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+a:hover {
+    background: #016cd7;
+}
