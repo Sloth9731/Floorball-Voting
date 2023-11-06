@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Votes for {{ player.name }}{% endblock %}
+
+{% block content %}
+<h2>Votes for {{ player.name }}</h2>
+
+{% if game_votes %}
+    <table>
+        <thead>
+            <tr>
+                <th>Game</th>
+                <th>3 Points</th>
+                <th>2 Points</th>
+                <th>1 Point</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for game, votes in game_votes.items %}
+                <tr>
+                    <td>{{ game }}</td>
+                    <td>{{ votes.3 }} vote(s)</td>
+                    <td>{{ votes.2 }} vote(s)</td>
+                    <td>{{ votes.1 }} vote(s)</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>This player has not received any votes.</p>
+{% endif %}
+{% endblock %}

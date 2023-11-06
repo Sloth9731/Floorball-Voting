@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from .models import Game, Vote
+from .models import Game, Vote, Player
 from django.db.models import Sum
 from .forms import VoteForm
 from django.shortcuts import redirect
@@ -21,21 +21,14 @@ def vote(request, game_id):
         if form.is_valid():
             vote = form.save(commit=False)
             vote.game = game
-            
-            # Ensure player votes are being saved
-            vote.vote_3_points = form.cleaned_data['vote_3_points']
-            vote.vote_2_points = form.cleaned_data['vote_2_points']
-            vote.vote_1_point = form.cleaned_data['vote_1_point']
-
-            # For debugging purposes, print out the vote details
-            print("3 Points:", form.cleaned_data['vote_3_points'])
-            print("2 Points:", form.cleaned_data['vote_2_points'])
-            print("1 Point:", form.cleaned_data['vote_1_point'])
-
+    
+    # Use the correct field names from your model
+            vote.vote_3_points_player = form.cleaned_data['vote_3_points_player']
+            vote.vote_2_points_player = form.cleaned_data['vote_2_points_player']
+            vote.vote_1_point_player = form.cleaned_data['vote_1_point_player']   
             vote.save()
-            print("Vote Saved:", vote.id)
-            return redirect('select_game')
 
+            return redirect('select_game')
         print("Form is not valid")
         print(form.errors)
 
@@ -44,43 +37,27 @@ def vote(request, game_id):
 
     return render(request, 'vote.html', {'form': form, 'game': game})
 
+def player_votes(request, player_id):
 
-@login_required
-def display_total_points(request):
-    votes = Vote.objects.all()
-    all_games_points = Counter()
+    player = get_object_or_404(Player, pk=player_id)
 
-    for vote in votes:
-        all_games_points[vote.vote_3_points] += 3
-        all_games_points[vote.vote_2_points] += 2
-        all_games_points[vote.vote_1_point] += 1
+    game_votes = {}
 
-    sorted_all_games = sorted(all_games_points.items(), key=lambda x: x[1], reverse=True)
+    # Query all votes associated with this player
+    votes_3_points = Vote.objects.filter(vote_3_points_player=player)
+    votes_2_points = Vote.objects.filter(vote_2_points_player=player)
+    votes_1_point = Vote.objects.filter(vote_1_point_player=player)
 
-    context = {
-        'all_games': sorted_all_games,
-        'games': Game.objects.all(),
-    }
-
-    return render(request, 'total_points.html', context)
-
-@login_required
-def display_game_points(request, game_id):
-    game = get_object_or_404(Game, pk=game_id)
-    votes = Vote.objects.filter(game=game)
-
-    game_points = Counter()
-
-    for vote in votes:
-        game_points[vote.vote_3_points] += 3
-        game_points[vote.vote_2_points] += 2
-        game_points[vote.vote_1_point] += 1
-
-    sorted_game_points = sorted(game_points.items(), key=lambda x: x[1], reverse=True)
+    # Collect all votes in a structured way
+    for vote in votes_3_points:
+        game_votes.setdefault(vote.game, {'3': 0, '2': 0, '1': 0})['3'] += 1
+    for vote in votes_2_points:
+        game_votes.setdefault(vote.game, {'3': 0, '2': 0, '1': 0})['2'] += 1
+    for vote in votes_1_point:
+        game_votes.setdefault(vote.game, {'3': 0, '2': 0, '1': 0})['1'] += 1
 
     context = {
-        'game_points': sorted_game_points,
-        'game': game,
+        'player': player,
+        'game_votes': game_votes,
     }
-
-    return render(request, 'game_points.html', context)
+    return render(request, 'player_votes.html', context)

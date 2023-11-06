@@ -1,18 +1,25 @@
 from django import forms
-from .models import Vote, Game
-
-PLAYER_CHOICES = [(player, player) for player in [
-    'Adam Biddle', 'Alex Sket', 'Asher Bartulovich', 'Daniel Steffanoni', 'Finn Hay', 'Flynn Craig', 'Harry Fahrner', 'James Hollingsworth', 
-    'Kiran Kulcar', 'Sam Weight', 'Sarah Guilfoyle', 'Stephan Samuel' , 'Thomas Gambuti', 'William Charles', 'Zoe Shanahan'
-]]
+from .models import Vote, Player
 
 class VoteForm(forms.ModelForm):
     class Meta:
         model = Vote
-        fields = [ 'voter_name', 'vote_3_points', 'vote_2_points', 'vote_1_point', 'fines']
+        fields = ['voter_name', 'vote_3_points_player', 'vote_2_points_player', 'vote_1_point_player', 'fines']
 
     voter_name = forms.CharField(required=False)
-    vote_3_points = forms.ChoiceField(choices=[('', 'Select Player for 3 Points')] + PLAYER_CHOICES)
-    vote_2_points = forms.ChoiceField(choices=[('', 'Select Player for 2 Points')] + PLAYER_CHOICES)
-    vote_1_point = forms.ChoiceField(choices=[('', 'Select Player for 1 Point')] + PLAYER_CHOICES)
+    vote_3_points_player = forms.ModelChoiceField(
+        queryset=Player.objects.all(),
+        empty_label="Select Player for 3 Points",
+        required=False
+    )
+    vote_2_points_player = forms.ModelChoiceField(
+        queryset=Player.objects.all(),
+        empty_label="Select Player for 2 Points",
+        required=False
+    )
+    vote_1_point_player = forms.ModelChoiceField(
+        queryset=Player.objects.all(),
+        empty_label="Select Player for 1 Point",
+        required=False
+    )
     fines = forms.CharField(widget=forms.Textarea, required=False)

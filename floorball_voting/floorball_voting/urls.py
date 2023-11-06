@@ -23,9 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls), 
     path('', views.select_game, name='select_game'),
     path('vote/<int:game_id>/', views.vote, name='vote'),
-    path('total_points/', views.display_total_points, name='total_points'),
-    path('total_points/<int:game_id>/', views.display_total_points, name='display_total_points'),
-    path('game_points/<int:game_id>/', views.display_game_points, name='game_points'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('accounts/', include('django.contrib.auth.urls')),  
+    path('player/<int:player_id>/votes/', views.player_votes, name='player_votes'),
 ]
