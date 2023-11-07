@@ -1,32 +1,53 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Votes for {{ player.name }}{% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'myapp/css/styles.css' %}">
+{% endblock %}
 
 {% block content %}
-<h2>Votes for {{ player.name }}</h2>
+  <h1>Player Votes</h1>
 
-{% if game_votes %}
+  <!-- Player Selector Form -->
+  <form action="{% url 'player_votes' %}" method="get">
+    <select name="player_id" onchange="this.form.submit()">
+      {% for player in players %}
+        <option value="{{ player.id }}" {% if player.id == selected_player.id %}selected{% endif %}>{{ player.name }}</option>
+      {% endfor %}
+    </select>
+  </form>
+
+  <!-- Check if game_votes exists -->
+  {% if game_votes %}
+    <h2>Votes for {{ selected_player.name }}</h2>
     <table>
-        <thead>
-            <tr>
-                <th>Game</th>
-                <th>3 Points</th>
-                <th>2 Points</th>
-                <th>1 Point</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for game, votes in game_votes.items %}
-                <tr>
-                    <td>{{ game }}</td>
-                    <td>{{ votes.3 }} vote(s)</td>
-                    <td>{{ votes.2 }} vote(s)</td>
-                    <td>{{ votes.1 }} vote(s)</td>
-                </tr>
-            {% endfor %}
-        </tbody>
+      <thead>
+        <tr>
+          <th>Game</th>
+          <th>3 Points Votes</th>
+          <th>2 Points Votes</th>
+          <th>1 Point Votes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for game, votes in game_votes.items %}
+          <tr>
+            <td>{{ game }}</td>
+            <td>{{ votes.3 }}</td>
+            <td>{{ votes.2 }}</td>
+            <td>{{ votes.1 }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
     </table>
-{% else %}
-    <p>This player has not received any votes.</p>
-{% endif %}
+
+    <h3>Total Votes Across All Games: {{ total_votes }}</h3>
+    <h3>Grand Total of Votes: {{ grand_total_votes }}</h3>
+
+  {% else %}
+    <p>Select a player to view votes.</p>
+  {% endif %}
+
+  <a href="{% url 'total_points' %}">View total points for all games</a><br>
+  <a href="{% url 'select_game' %}">Home</a> 
 {% endblock %}

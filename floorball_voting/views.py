@@ -37,27 +37,41 @@ def vote(request, game_id):
 
     return render(request, 'vote.html', {'form': form, 'game': game})
 
-def player_votes(request, player_id):
 
-    player = get_object_or_404(Player, pk=player_id)
 
+def player_votes(request):
+    players = Player.objects.all()
+    selected_player_id = request.GET.get('player_id')
     game_votes = {}
+    total_votes = 0
+    grand_total_votes = 0
+    selected_player = None
 
-    # Query all votes associated with this player
-    votes_3_points = Vote.objects.filter(vote_3_points_player=player)
-    votes_2_points = Vote.objects.filter(vote_2_points_player=player)
-    votes_1_point = Vote.objects.filter(vote_1_point_player=player)
+    if selected_player_id:
+        selected_player = get_object_or_404(Player, pk=selected_player_id)
+        votes_3_points = Vote.objects.filter(vote_3_points_player=selected_player)
+        votes_2_points = Vote.objects.filter(vote_2_points_player=selected_player)
+        votes_1_point = Vote.objects.filter(vote_1_point_player=selected_player)
 
-    # Collect all votes in a structured way
-    for vote in votes_3_points:
-        game_votes.setdefault(vote.game, {'3': 0, '2': 0, '1': 0})['3'] += 1
-    for vote in votes_2_points:
-        game_votes.setdefault(vote.game, {'3': 0, '2': 0, '1': 0})['2'] += 1
-    for vote in votes_1_point:
-        game_votes.setdefault(vote.game, {'3': 0, '2': 0, '1': 0})['1'] += 1
+        # Collect all votes in a structured way
+        for vote in votes_3_points:
+            game_votes.setdefault(vote.game, {'3': 0, '2': 0, '1': 0})['3'] += 1
+        for vote in votes_2_points:
+            game_votes.setdefault(vote.game, {'3': 0, '2': 0, '1': 0})['2'] += 1
+        for vote in votes_1_point:
+            game_votes.setdefault(vote.game, {'3': 0, '2': 0, '1': 0})['1'] += 1
+
+        # Calculate totals
+        for votes in game_votes.values():
+            total_votes += votes['3'] + votes['2'] + votes['1']
+            grand_total_votes += votes['3'] * 3 + votes['2'] * 2 + votes['1'] * 1
 
     context = {
-        'player': player,
+        'players': players,
+        'selected_player': selected_player,
         'game_votes': game_votes,
+        'total_votes': total_votes,
+        'grand_total_votes': grand_total_votes,
     }
     return render(request, 'player_votes.html', context)
+
