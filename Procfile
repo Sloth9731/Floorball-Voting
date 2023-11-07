@@ -1,1 +1,1 @@
-web: gunicorn floorball_voting.wsgi
+web: gunicorn floorball_voting.floorball_voting.wsgi
