@@ -2,6 +2,7 @@
 body, ul {
     margin: 0;
     padding: 0;
+    box-sizing: border-box; /* Ensures padding doesn't affect the total width */
 }
 
 /* Apply a background color to the body, and set the font */
@@ -10,10 +11,14 @@ body {
     color: #333; /* Dark text */
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    display: flex; /* Use Flexbox */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    min-height: 100vh; /* At least full viewport height */
+    padding-left: 10%; /* 10% padding from the left */
+}
+
+/* Style the content container */
+.content-container {
+    width: 100%; /* Full width of the parent minus padding */
+    max-width: 600px; /* Max width can be set for larger screens */
+    margin-right: 10%; /* Maintain the 10% spacing on the right for consistency */
 }
 
 /* Style the headings */
@@ -74,4 +79,15 @@ a {
 
 a:hover {
     background: #016cd7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        padding-left: 5%; /* Less padding on smaller screens */
+        padding-right: 5%; /* Add some padding on the right to avoid edge-to-edge content display */
+    }
+    .content-container {
+        margin-right: 0; /* Remove the right margin on smaller screens */
+    }
 }
