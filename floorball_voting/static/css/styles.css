@@ -10,6 +10,10 @@ body {
     color: #333; /* Dark text */
     font-family: Arial, sans-serif;
     line-height: 1.6;
+    display: flex; /* Use Flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    min-height: 100vh; /* At least full viewport height */
 }
 
 /* Style the headings */
