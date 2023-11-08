@@ -36,7 +36,7 @@ li {
     justify-content: center; /* Center content horizontally */
     align-items: center; /* Center content vertically */
     height: 60px; /* Set a fixed height for list items */
-    padding-bottom: 50px;
+    padding-bottom: 30px;
 }
 
 li a {
