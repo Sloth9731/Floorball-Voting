@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Player Statistics</h1>
+<div>
+    <a href="?sort=goals">Sort by Goals</a> |
+    <a href="?sort=assists">Sort by Assists</a> |
+    <a href="?sort=match_votes">Sort by Match Votes</a> |
+    <a href="?sort=penalties">Sort by Penalties</a>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Goals</th>
+            <th>Assists</th>
+            <th>Match Votes</th>
+            <th>Penalties</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for player in players %}
+        <tr>
+            <td>{{ player.name }}</td>
+            <td>{{ player.goals }}</td>
+            <td>{{ player.assists }}</td>
+            <td>{{ player.match_votes }}</td>
+            <td>{{ player.penalties }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

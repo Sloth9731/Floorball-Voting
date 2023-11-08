@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from .models import Game, Vote, Player
-from django.db.models import Sum
+from django.db.models import Sum, F
 from .forms import VoteForm
 from django.shortcuts import redirect
 from collections import Counter, defaultdict
@@ -75,3 +75,16 @@ def player_votes(request):
     }
     return render(request, 'player_votes.html', context)
 
+
+def statistics(request):
+    sort_by = request.GET.get('sort', 'name')  
+    if sort_by not in ['name', 'goals', 'assists', 'match_votes', 'penalties']:
+        sort_by = 'name'  
+
+    players = Player.objects.all().order_by(F(sort_by).desc(nulls_last=True))  # Sort by specified field
+
+    context = {
+        'players': players,
+        'sort_by': sort_by,
+    }
+    return render(request, 'statistics.html', context)

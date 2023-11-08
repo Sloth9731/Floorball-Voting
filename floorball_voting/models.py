@@ -19,6 +19,7 @@ class Game(models.Model):
     score = models.CharField(max_length=255, null=True, blank=True)
     result = models.CharField(max_length=255, null=True, blank=True)
     goal = models.TextField(max_length=255, null=True, blank=True)
+    assists = models.TextField(max_length=255, null=True, blank=True)
     match_votes = models.TextField(max_length=255, null=True, blank=True)
     minuites = models.TextField(max_length=255, null=True, blank=True)
 

@@ -11,40 +11,39 @@ body {
     color: #333; /* Dark text */
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    padding-left: 10%; /* 10% padding from the left */
+    display: flex; /* Use flexbox to center the content container */
+    justify-content: center; /* Center horizontally */
+    min-height: 100vh; /* Full height of the viewport */
+    padding: 20px; /* Padding around the edges */
 }
 
 /* Style the content container */
 .content-container {
-    width: 100%; /* Full width of the parent minus padding */
-    max-width: 600px; /* Max width can be set for larger screens */
-    margin-right: 10%; /* Maintain the 10% spacing on the right for consistency */
-}
-
-/* Style the headings */
-h1, h3 {
-    color: #004080; /* Darker blue for headings */
-}
-
-h1 {
-    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px; /* Max width for larger screens, adjust as needed */
+    margin: auto; /* Center the container */
+    padding: 10px; /* Padding inside the container */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add shadow for some depth */
+    background: #fff; /* White background */
 }
 
 /* Style the list of games */
 ul {
     list-style: none;
+    padding: 0; /* Remove default padding */
 }
 
 li {
-    background: #fff; /* White background for list items */
     border: 1px solid #ccc; /* Border between items */
     margin-bottom: 5px;
     padding: 10px;
+    text-align: center; /* Center the text */
 }
 
 li a {
-    color: #ffffff; 
+    color: #004080;
     text-decoration: none;
+    display: block; /* Make the link fill the entire list item */
 }
 
 /* Style the forms */

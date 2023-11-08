@@ -1,16 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-{% endblock %}
-
-
-
 {% block title %}Select a Game{% endblock %}
 
 {% block content %}
-<h1>Roosters Div 2 Voting</h1>
+    <h1>Roosters Div 2 Voting</h1>
     <ul>
         <h3>Select a Game to Vote</h3>
         {% for game in games %}
@@ -21,7 +15,7 @@
     </ul>
     {% if user.is_authenticated and user.is_staff %}
     <a href="{% url 'player_votes' %}">Points</a>
-{% endif %}
+    {% endif %}
+    <a href="{% url 'statistics' %}">Stats</a>
     <a href="{% url 'login'%}"> login</a><p>You dont need to login</p>
-    
 {% endblock %}
