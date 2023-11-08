@@ -160,7 +160,5 @@ cython_debug/
 #.idea/
 venv/
 env/
-*.pyc
-__pycache__/
 .git/
 .gitignore
