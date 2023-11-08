@@ -8,7 +8,7 @@ from collections import Counter, defaultdict
 from django.contrib.auth.decorators import login_required
 
 def select_game(request):
-    games = Game.objects.all()
+    games = Game.objects.all().order_by('-date')  
     return render(request, 'select_game.html', {'games': games})
 
 
