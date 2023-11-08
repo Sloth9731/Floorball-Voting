@@ -31,8 +31,6 @@ ul {
 }
 
 li {
-    background: #fff; /* White background for list items */
-    border: 1px solid #ccc; /* Border between items */
     margin-bottom: 5px;
     display: flex; /* Make the list item a flex container */
     justify-content: center; /* Center content horizontally */
