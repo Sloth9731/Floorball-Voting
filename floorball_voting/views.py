@@ -38,7 +38,7 @@ def vote(request, game_id):
     return render(request, 'vote.html', {'form': form, 'game': game})
 
 
-
+@login_required
 def player_votes(request):
     players = Player.objects.all()
     selected_player_id = request.GET.get('player_id')

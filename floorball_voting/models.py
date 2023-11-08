@@ -2,8 +2,10 @@ from django.db import models
 
 class Player(models.Model):
     name = models.CharField(max_length=255)
-    goals_scored = models.IntegerField(default=0)
-    points = models.IntegerField(default=0)
+    goals = models.IntegerField(default=0)
+    assists = models.IntegerField(default=0)
+    match_votes = models.IntegerField(default=0)
+    team_votes = models.IntegerField(default=0)
     penalties = models.IntegerField(default=0)
 
     def __str__(self):
