@@ -87,16 +87,6 @@ a:hover {
     background: #016cd7;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    body {
-        padding-left: 5%; /* Less padding on smaller screens */
-        padding-right: 5%; /* Add some padding on the right to avoid edge-to-edge content display */
-    }
-    .content-container {
-        margin-right: 0; /* Remove the right margin on smaller screens */
-    }
-}
 .sort-options {
     display: flex;
     flex-wrap: wrap;
@@ -123,5 +113,15 @@ a:hover {
 
     .sort-options a {
         flex: none; /* Do not allow the links to grow, so they maintain their content's width */
+    }
+    body {
+        padding-left: 5%; /* Less padding on smaller screens */
+        padding-right: 5%; /* Add some padding on the right to avoid edge-to-edge content display */
+    }
+    .content-container {
+        margin-right: 0; /* Remove the right margin on smaller screens */
+    }
+    form input, form select, form textarea {
+        width: 100%; /* Full width on smaller screens */
     }
 }
