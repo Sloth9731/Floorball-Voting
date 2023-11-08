@@ -11,9 +11,6 @@ body {
     color: #333; /* Dark text */
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    display: flex; /* Use flexbox to center the content container */
-    justify-content: center; /* Center horizontally */
-    min-height: 100vh; /* Full height of the viewport */
     padding: 20px; /* Padding around the edges */
 }
 
@@ -21,7 +18,7 @@ body {
 .content-container {
     width: 100%;
     max-width: 600px; /* Max width for larger screens, adjust as needed */
-    margin: auto; /* Center the container */
+    margin: 20px auto 0 auto; /* Top and bottom margin 20px, auto for left/right to center */
     padding: 10px; /* Padding inside the container */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add shadow for some depth */
     background: #fff; /* White background */
@@ -34,16 +31,27 @@ ul {
 }
 
 li {
+    background: #fff; /* White background for list items */
     border: 1px solid #ccc; /* Border between items */
     margin-bottom: 5px;
-    padding: 10px;
-    text-align: center; /* Center the text */
+    display: flex; /* Make the list item a flex container */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    height: 60px; /* Set a fixed height for list items */
 }
 
 li a {
-    color: #004080;
+    background: #004080; /* Blue background for links */
+    color: #fff; /* White text for links */
     text-decoration: none;
-    display: block; /* Make the link fill the entire list item */
+    padding: 10px 20px; /* Padding inside the link */
+    border-radius: 5px; /* Optional: rounded corners for the link */
+
+}
+
+/* Optionally, you can add a hover effect to the link */
+li a:hover {
+    background: #0059b3; /* Darker blue on hover */
 }
 
 /* Style the forms */
