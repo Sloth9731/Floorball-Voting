@@ -100,17 +100,20 @@ a:hover {
 .sort-options {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* Adjust the spacing between the links as needed */
+    gap: 5px; 
     justify-content: center; /* Center the links container */
-    margin-bottom: 15px; /* Space below the sort options */
+    margin-bottom: 10px; /* Reduced space below the sort options */
 }
 
 .sort-options a {
-    flex: 1; /* Allows each link to grow and use available space */
-    text-align: center; /* Center the text within each link */
-    white-space: nowrap; /* Prevents the text from wrapping */
-    overflow: hidden; /* Hide overflow */
-    text-overflow: ellipsis; /* Add an ellipsis to text that overflows */
+    flex: 1; 
+    text-align: center; 
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.8em;
+    padding: 5px 10px; 
+    margin: 0 2px; 
 }
 
 @media (max-width: 768px) {
