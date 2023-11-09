@@ -106,7 +106,7 @@ a:hover {
     margin: 0 2px; 
 }
 .inactive-game {
-    background: #d3d3d3; /* Light grey background for inactive games */
+    background: #d3d3d360; /* Light grey background for inactive games */
     color: #a9a9a9; /* Dark grey text color to indicate inactive state */
     pointer-events: none; /* Prevents clicking on the item */
     opacity: 0.6; /* Makes the item look faded */
