@@ -22,6 +22,7 @@ class Game(models.Model):
     assists = models.TextField(max_length=255, null=True, blank=True)
     match_votes = models.TextField(max_length=255, null=True, blank=True)
     minuites = models.TextField(max_length=255, null=True, blank=True)
+    active = models.BooleanField(default=True)
 
     class Meta:
         app_label = 'floorball_voting'
