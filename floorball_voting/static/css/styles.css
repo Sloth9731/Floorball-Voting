@@ -112,15 +112,6 @@ a:hover {
     opacity: 0.6; /* Makes the item look faded */
 }
 
-.inactive-game a {
-    pointer-events: none; /* Ensures the link is not clickable */
-    background: #d3d3d3; /* Same as inactive-game background */
-    color: #a9a9a9; /* Same as inactive-game text color */
-}
-
-.inactive-game a:hover {
-    background: #d3d3d3;
-}
 
 @media (max-width: 768px) {
     .sort-options {
