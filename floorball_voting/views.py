@@ -6,6 +6,7 @@ from .forms import VoteForm
 from django.shortcuts import redirect
 from collections import Counter, defaultdict
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def select_game(request):
     games = Game.objects.all().order_by('-date')  
@@ -27,6 +28,7 @@ def vote(request, game_id):
             vote.vote_2_points_player = form.cleaned_data['vote_2_points_player']
             vote.vote_1_point_player = form.cleaned_data['vote_1_point_player']   
             vote.save()
+            messages.success(request, 'Thank you for voting!')
 
             return redirect('select_game')
         print("Form is not valid")

@@ -7,6 +7,9 @@
 
 {% block title %}Vote {% endblock %}
 {% block content %}
+    {% for message in messages %}
+    <p><strong>{{ message }}</strong></p>
+    {% endfor %}
     <h1>Vote</h1>
     <h3>Date</h3>
     {{ game.date }}<br>
