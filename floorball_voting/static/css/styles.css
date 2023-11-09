@@ -106,16 +106,16 @@ a:hover {
     margin: 0 2px; 
 }
 .inactive-game {
-    background: #050df7; /* Light grey background for inactive games */
-    color: rgb(0, 249, 75);
+    background: #ffffff; /* Light grey background for inactive games */
+    color: rgb(255, 255, 255);
     pointer-events: none; /* Prevents clicking on the item */
     opacity: 0.8; /* Makes the item look faded */
 }
 
 .inactive-game a {
     pointer-events: none; /* Ensures the link is not clickable */
-    background: #000000fb; /* Same as inactive-game background */
-    color: #ff0000; /* Same as inactive-game text color */
+    background: #4e4e4efb; /* Same as inactive-game background */
+    color: #b5b5b5; /* Same as inactive-game text color */
 }
 
 
