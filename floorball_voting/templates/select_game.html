@@ -8,7 +8,12 @@
     <ul>
         <h3>Select a Game to Vote</h3>
         {% for game in games %}
-            <li><a href="{% url 'vote' game_id=game.id %}">Game on {{game.date}} at {{game.location}} against {{game.team}} {{game.score}} Result: {{game.result}} </a></li>
+            <li class="{% if not game.active %}inactive-game{% endif %}">
+                Game on {{ game.date }} at {{ game.location }} against {{ game.team }} {{ game.score }} Result: {{ game.result }}
+                <a href="{% if game.active %}{% url 'vote' game_id=game.id %}{% endif %}">
+                    Game on {{ game.date }} at {{ game.location }} against {{ game.team }} {{ game.score }} Result: {{ game.result }}
+                </a>
+            </li>
         {% empty %}
             <li>No games available for voting.</li>
         {% endfor %}
