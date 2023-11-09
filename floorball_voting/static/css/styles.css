@@ -114,8 +114,8 @@ a:hover {
 
 .inactive-game a {
     pointer-events: none; /* Ensures the link is not clickable */
-    background: #ffffff66; /* Same as inactive-game background */
-    color: #c5c5c5; /* Same as inactive-game text color */
+    background: #fffffffb; /* Same as inactive-game background */
+    color: #c5c5c563; /* Same as inactive-game text color */
 }
 
 
