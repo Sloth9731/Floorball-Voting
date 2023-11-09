@@ -7,9 +7,6 @@
 
 {% block title %}Vote {% endblock %}
 {% block content %}
-    {% for message in messages %}
-    <p><strong>{{ message }}</strong></p>
-    {% endfor %}
     <h1>Vote</h1>
     <h3>Date</h3>
     {{ game.date }}<br>
@@ -30,10 +27,17 @@
     <h3>Penalty Minutes</h3>
     <pre>{{ game.minuites }}</pre>
     <h3>Vote Here</h3>
-    <form method="post" action="{% url 'vote' game_id=game.id %}">
+    <form method="post" action="{% url 'vote' game_id=game.id %}" onsubmit="return showThankYouMessage()">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Vote">
     </form>
     <a href="{% url 'select_game' %}">Back</a> 
+
+    <script>
+        function showThankYouMessage() {
+            alert('Thank you for voting!');
+            return true; 
+        }
+        </script>
 {% endblock %}

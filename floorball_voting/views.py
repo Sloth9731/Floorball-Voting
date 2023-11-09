@@ -28,7 +28,6 @@ def vote(request, game_id):
             vote.vote_2_points_player = form.cleaned_data['vote_2_points_player']
             vote.vote_1_point_player = form.cleaned_data['vote_1_point_player']   
             vote.save()
-            messages.success(request, 'Thank you for voting!')
 
             return redirect('select_game')
         print("Form is not valid")
