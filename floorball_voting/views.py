@@ -122,8 +122,6 @@ def game_info(request):
             if vote.fines:
                 fines.append(f"{vote.voter_name}: {vote.fines}")
 
-        # Order players by total votes in descending order
-        ordered_players = sorted(players, key=lambda player: sum(player_votes_by_game[player].values()), reverse=True)
 
         # Prepare the data to be sent to the template
     context = {
