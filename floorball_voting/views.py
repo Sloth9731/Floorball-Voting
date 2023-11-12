@@ -130,7 +130,7 @@ def game_info(request):
         }
 
         # Render the template and return the response
-        return render(request, 'your_template_name.html', context)
+        return render(request, 'game_info.html', context)
 
     else:
         # Handle the case when no game is selected
