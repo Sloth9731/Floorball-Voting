@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Player Votes</h1>
+  <h1>Game Votes</h1>
 
   <!-- Player Selector Form -->
   <form action="{% url 'game_info' %}" method="get">
@@ -41,7 +41,7 @@
   </ul>
 
   {% else %}
-    <p>Select a player to view votes.</p>
+    <p>Select a game to view.</p>
   {% endif %}
 
   <a href="{% url 'select_game' %}">Home</a> 

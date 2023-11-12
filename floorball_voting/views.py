@@ -94,6 +94,7 @@ def statistics(request):
 def game_info(request):
     # Retrieve all players
     players = Player.objects.all()
+    games = Game.objects.all()
 
     # Get the selected game ID from the request
     selected_game_id = request.GET.get('game_id')
@@ -126,6 +127,7 @@ def game_info(request):
 
         # Prepare the data to be sent to the template
     context = {
+        'games': games,
         'players': ordered_players,
         'selected_game': selected_game,
         'player_votes': player_votes,
