@@ -25,7 +25,9 @@
   <h3>Total Votes:</h3>
   <ul class="compact-list">
     {% for player, vote in player_votes.items %}
-            <li>{{ player }}: {{ vote }} </li>
+            {% if vote>0 %}
+                <li>{{ player }}: {{ vote }} </li>
+            {% endif %}
     {% endfor %}
   </ul>
   
