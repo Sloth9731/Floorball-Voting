@@ -6,7 +6,7 @@ from .forms import VoteForm
 from django.shortcuts import redirect
 from collections import Counter, defaultdict
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
+from django.http import HttpResponse
 
 def select_game(request):
     games = Game.objects.all().order_by('-date')  
@@ -89,3 +89,49 @@ def statistics(request):
         'sort_by': sort_by,
     }
     return render(request, 'statistics.html', context)
+
+@login_required
+def game_info(request):
+    # Retrieve all players
+    players = Player.objects.all()
+
+    # Get the selected game ID from the request
+    selected_game_id = request.GET.get('game_id')
+
+    if selected_game_id:
+        # Get the selected game
+        selected_game = get_object_or_404(Game, pk=selected_game_id)
+
+        # Collect votes and fines for the selected game
+        player_votes = defaultdict(int)
+        fines = []
+
+        # Iterate through the votes for the selected game
+        votes_for_game = Vote.objects.filter(game=selected_game)
+        for vote in votes_for_game:
+            # Accumulate votes for each player
+            player_votes[vote.vote_3_points_player] += 3
+            player_votes[vote.vote_2_points_player] += 2
+            player_votes[vote.vote_1_point_player] += 1
+
+            # Collect fines
+            if vote.fines:
+                fines.append(f"{vote.voter_name}: {vote.fines}")
+
+        # Order players by total votes in descending order
+        ordered_players = sorted(players, key=lambda player: player_votes[player], reverse=True)
+
+        # Prepare the data to be sent to the template
+        context = {
+            'players': ordered_players,
+            'selected_game': selected_game,
+            'player_votes': player_votes,
+            'fines': fines,
+        }
+
+        # Render the template and return the response
+        return render(request, 'your_template_name.html', context)
+
+    else:
+        # Handle the case when no game is selected
+        return HttpResponse("No game selected.")

@@ -26,5 +26,6 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('accounts/', include('django.contrib.auth.urls')),  
     path('player_votes', views.player_votes, name='player_votes'),
+    path('game_info', views.game_info, name='game_info'),
     path('statistics/', views.statistics, name='statistics'),
 ]

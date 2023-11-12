@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'myapp/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+  <h1>Player Votes</h1>
+
+  <!-- Player Selector Form -->
+  <form action="{% url 'game_info' %}" method="get">
+    <select name="game_id" onchange="this.form.submit()">
+      {% for game in games %}
+        <option value="{{ game.id }}" {% if game.id == selected_game_id %}selected{% endif %}>{{ game.team }}</option>
+      {% endfor %}
+    </select>
+  </form>
+
+  {% if selected_game %}
+
+  <h2>{{ selected_game }}</h2>
+
+  <!-- Display Players and Votes -->
+  <h3>Total Votes:</h3>
+  <ul>
+    {% for player in players %}
+      <li>{{ player.name }}: {{ player_votes|default:0|get:player }} votes</li>
+    {% endfor %}
+  </ul>
+
+  <!-- Display Fines -->
+  <h3>Fines:</h3>
+  <ul>
+    {% for fine in fines %}
+      <li>{{ fine }}</li>
+    {% endfor %}
+  </ul>
+
+  {% else %}
+    <p>Select a player to view votes.</p>
+  {% endif %}
+
+  <a href="{% url 'select_game' %}">Home</a> 
+{% endblock %}
