@@ -24,10 +24,8 @@
   <!-- Display Players and Votes -->
   <h3>Total Votes:</h3>
   <ul>
-    {% for player in players %}
-          {% if votes.selected_game.id %}
-            <li>{{ player.name }}: {{ votes.selected_game.id }} votes</li>
-          {% endif %}
+    {% for player, vote in player_votes.items %}
+            <li>{{ player }}: {{ vote }} </li>
     {% endfor %}
   </ul>
   

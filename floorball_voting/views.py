@@ -23,7 +23,7 @@ def vote(request, game_id):
             vote = form.save(commit=False)
             vote.game = game
     
-    # Use the correct field names from your model
+
             vote.vote_3_points_player = form.cleaned_data['vote_3_points_player']
             vote.vote_2_points_player = form.cleaned_data['vote_2_points_player']
             vote.vote_1_point_player = form.cleaned_data['vote_1_point_player']   
@@ -98,27 +98,28 @@ def game_info(request):
 
     # Get the selected game ID from the request
     selected_game_id = request.GET.get('game_id')
-    player_votes_by_game = {}
+    player_votes = {}
     fines = []
     selected_game = None
-    ordered_players = None
-
 
     if selected_game_id:
         # Get the selected game
         selected_game = get_object_or_404(Game, pk=selected_game_id)
+        for player in players:
+            game_votes = 0
+            votes_3_points = Vote.objects.filter(vote_3_points_player=player)
+            votes_2_points = Vote.objects.filter(vote_2_points_player=player)
+            votes_1_point = Vote.objects.filter(vote_1_point_player=player)
+            for vote in votes_3_points:
+                game_votes += 3
+            for vote in votes_2_points:
+                game_votes += 2
+            for vote in votes_1_point:
+                game_votes += 1
+            player_votes[player.name] = game_votes
 
-        # Collect votes and fines for the selected game
-
-        # Iterate through the votes for the selected game
         votes_for_game = Vote.objects.filter(game=selected_game)
         for vote in votes_for_game:
-            # Accumulate votes for each player in the selected game
-            player_votes_by_game.setdefault(vote.vote_3_points_player, {'3': 0, '2': 0, '1': 0})['3'] += 1
-            player_votes_by_game.setdefault(vote.vote_2_points_player, {'3': 0, '2': 0, '1': 0})['2'] += 1
-            player_votes_by_game.setdefault(vote.vote_1_point_player, {'3': 0, '2': 0, '1': 0})['1'] += 1
-
-            # Collect fines
             if vote.fines:
                 fines.append(f"{vote.voter_name}: {vote.fines}")
 
@@ -126,9 +127,8 @@ def game_info(request):
         # Prepare the data to be sent to the template
     context = {
         'games': games,
-        'players': ordered_players,
         'selected_game': selected_game,
-        'player_votes_by_game': player_votes_by_game,
+        'player_votes': player_votes,
         'fines': fines,
     }
 
