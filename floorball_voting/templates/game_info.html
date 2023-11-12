@@ -25,9 +25,12 @@
   <h3>Total Votes:</h3>
   <ul>
     {% for player in players %}
-    <li>{{ player.name }}: {{ player_votes[player] }} votes</li>
+      {% with player_vote=player_votes.player %}
+        <li>{{ player.name }}: {{ player_vote }} votes</li>
+      {% endwith %}
     {% endfor %}
   </ul>
+  
 
   <!-- Display Fines -->
   <h3>Fines:</h3>
