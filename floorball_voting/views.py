@@ -107,9 +107,9 @@ def game_info(request):
         selected_game = get_object_or_404(Game, pk=selected_game_id)
         for player in players:
             game_votes = 0
-            votes_3_points = Vote.objects.filter(vote_3_points_player=player)
-            votes_2_points = Vote.objects.filter(vote_2_points_player=player)
-            votes_1_point = Vote.objects.filter(vote_1_point_player=player)
+            votes_3_points = Vote.objects.filter(vote_3_points_player=player, game=selected_game)
+            votes_2_points = Vote.objects.filter(vote_2_points_player=player, game=selected_game)
+            votes_1_point = Vote.objects.filter(vote_1_point_player=player, game=selected_game)
             for vote in votes_3_points:
                 game_votes += 3
             for vote in votes_2_points:
