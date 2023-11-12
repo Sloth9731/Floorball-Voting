@@ -23,7 +23,7 @@
 
   <!-- Display Players and Votes -->
   <h3>Total Votes:</h3>
-  <ul>
+  <ul class="compact-list">
     {% for player, vote in player_votes.items %}
             <li>{{ player }}: {{ vote }} </li>
     {% endfor %}

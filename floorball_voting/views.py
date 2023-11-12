@@ -118,6 +118,9 @@ def game_info(request):
                 game_votes += 1
             player_votes[player.name] = game_votes
 
+
+        player_votes = dict(sorted(player_votes.items(), key=lambda item: item[1], reverse=True))
+    
         votes_for_game = Vote.objects.filter(game=selected_game)
         for vote in votes_for_game:
             if vote.fines:
