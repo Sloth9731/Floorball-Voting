@@ -98,7 +98,7 @@ def game_info(request):
 
     # Get the selected game ID from the request
     selected_game_id = request.GET.get('game_id')
-    player_votes = defaultdict(int)
+    player_votes_by_game = {}
     fines = []
     selected_game = None
     ordered_players = None
@@ -113,24 +113,24 @@ def game_info(request):
         # Iterate through the votes for the selected game
         votes_for_game = Vote.objects.filter(game=selected_game)
         for vote in votes_for_game:
-            # Accumulate votes for each player
-            player_votes[vote.vote_3_points_player] += 3
-            player_votes[vote.vote_2_points_player] += 2
-            player_votes[vote.vote_1_point_player] += 1
+            # Accumulate votes for each player in the selected game
+            player_votes_by_game.setdefault(vote.vote_3_points_player, {'3': 0, '2': 0, '1': 0})['3'] += 1
+            player_votes_by_game.setdefault(vote.vote_2_points_player, {'3': 0, '2': 0, '1': 0})['2'] += 1
+            player_votes_by_game.setdefault(vote.vote_1_point_player, {'3': 0, '2': 0, '1': 0})['1'] += 1
 
             # Collect fines
             if vote.fines:
                 fines.append(f"{vote.voter_name}: {vote.fines}")
 
         # Order players by total votes in descending order
-        ordered_players = sorted(players, key=lambda player: player_votes[player], reverse=True)
+        ordered_players = sorted(players, key=lambda player: sum(player_votes_by_game[player].values()), reverse=True)
 
         # Prepare the data to be sent to the template
     context = {
         'games': games,
         'players': ordered_players,
         'selected_game': selected_game,
-        'player_votes': player_votes,
+        'player_votes_by_game': player_votes_by_game,
         'fines': fines,
     }
 

@@ -25,11 +25,16 @@
   <h3>Total Votes:</h3>
   <ul>
     {% for player in players %}
-      {% with player_vote=player_votes.player %}
-        <li>{{ player.name }}: {{ player_vote }} votes</li>
+      {% with player_vote=player_votes_by_game.player %}
+        {% with votes=player_vote|default:{} %}
+          {% if votes.selected_game.id %}
+            <li>{{ player.name }}: {{ votes.selected_game.id }} votes</li>
+          {% endif %}
+        {% endwith %}
       {% endwith %}
     {% endfor %}
   </ul>
+  
   
 
   <!-- Display Fines -->
