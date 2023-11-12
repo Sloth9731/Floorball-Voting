@@ -18,8 +18,8 @@
         {% endfor %}
     </ul>
     {% if user.is_authenticated and user.is_staff %}
-    <a href="{% url 'player_votes' %}">Points</a>
-    <a href="{% url 'game_info' %}">Points</a>
+    <a href="{% url 'player_votes' %}">Player Points</a>
+    <a href="{% url 'game_info' %}">Game votes</a>
     {% endif %}
     <a href="{% url 'statistics' %}">Stats</a>
     <a href="{% url 'login'%}"> login</a><p>You dont need to login, this is just for me</p>
